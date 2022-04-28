@@ -1669,7 +1669,12 @@ contract TanimoToken is ERC20 {
     function burnToken(address _from, uint _amountToken) onlyOwner public {
         _burn(_from, _amountToken);
     }
-    
+
+    modifier validateFee(uint256 _amount) {
+        require(msg.value == _amount, "Invalid ETH fee");
+        _;
+    }
+
     /**
      * @dev Get rates of token.
      */
